@@ -1,16 +1,24 @@
 import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/features/user/userSlice";
 
 export default function LogoutBtn() {
-    const { dispatch } = useAuth();
+    const { dispatch: authDispatch } = useAuth();
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     const onHandleLogout = async () => {
         setIsLoggingOut(true);
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        dispatch({ type: 'auth/logout' });
+        
+        // Clear user data from Redux store
+        dispatch(setUser({}));
+        
+        // Clear authentication
+        authDispatch({ type: 'auth/logout' });
         navigate('/login', { replace: true });
         setIsLoggingOut(false);
     };

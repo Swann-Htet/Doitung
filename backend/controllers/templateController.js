@@ -395,6 +395,64 @@ const generateAndUploadPDF = async (req, res) => {
   }
 };
 
+// Update template visibility (public/private)
+const updateTemplateVisibility = async (req, res) => {
+  try {
+    const { userId, templateId, isPublic } = req.body;
+
+    if (!templateId || isPublic === undefined) {
+      return res.json({ success: false, message: "Template ID and visibility status are required" });
+    }
+
+    // Find the template and check if user owns it
+    const template = await templateModel.findById(templateId);
+    if (!template) {
+      return res.json({ success: false, message: "Template not found" });
+    }
+
+    if (template.uploaderId !== userId) {
+      return res.json({ success: false, message: "You can only update your own templates" });
+    }
+
+    // Update the template visibility
+    await templateModel.findByIdAndUpdate(templateId, { isPublic: isPublic });
+
+    return res.json({
+      success: true,
+      message: `Template ${isPublic ? 'made public' : 'made private'} successfully`,
+    });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
+};
+
+// Update template visibility by admin (no ownership check)
+const updateTemplateVisibilityByAdmin = async (req, res) => {
+  try {
+    const { templateId, isPublic } = req.body;
+
+    if (!templateId || isPublic === undefined) {
+      return res.json({ success: false, message: "Template ID and visibility status are required" });
+    }
+
+    // Find the template
+    const template = await templateModel.findById(templateId);
+    if (!template) {
+      return res.json({ success: false, message: "Template not found" });
+    }
+
+    // Update the template visibility (admin can update any template)
+    await templateModel.findByIdAndUpdate(templateId, { isPublic: isPublic });
+
+    return res.json({
+      success: true,
+      message: `Template ${isPublic ? 'made public' : 'made private'} successfully`,
+    });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   uploadTemplate,
   getAllTemplatesByUser,
@@ -408,4 +466,6 @@ module.exports = {
   deleteTemplateByAdmin,
   renameTemplateTitleByAdmin,
   generateAndUploadPDF,
+  updateTemplateVisibility,
+  updateTemplateVisibilityByAdmin,
 };

@@ -1,10 +1,11 @@
 import Spinner from "@/ui/Spinner";
 import useDeleteTemplate from "./useDeleteTemplate";
+import useUpdateTemplateVisibility from "./useUpdateTemplateVisibility";
 import { ImageMinus } from "lucide-react";
 import Menus from "@/ui/Menus";
 import Modal from "@/ui/modals/Modal";
 import ConfirmDelete from "@/ui/modals/ConfirmDelete";
-import { HiPencil, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiTrash, HiEye, HiEyeSlash } from "react-icons/hi2";
 import RenameTemplateModal from "./RenameTemplateModal";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useUserTemplates from "./useUserTemplates";
@@ -12,6 +13,7 @@ import useUserTemplates from "./useUserTemplates";
 export default function TemplatesList() {
     const { templates, templatesLoading } = useUserTemplates()
     const { deleteTemplate, isDeleting } = useDeleteTemplate()
+    const { updateTemplateVisibility, isUpdatingVisibility } = useUpdateTemplateVisibility()
 
     const [searchParams] = useSearchParams()
     const navigate = useNavigate();
@@ -42,6 +44,17 @@ export default function TemplatesList() {
                                         <Modal.Open opens='rename-form'>
                                             <Menus.Button icon={<HiPencil className="text-blue-500" />}>Edit</Menus.Button>
                                         </Modal.Open>
+
+                                        <Menus.Button 
+                                            icon={template.isPublic ? <HiEyeSlash className="text-orange-500" /> : <HiEye className="text-green-500" />}
+                                            onClick={() => updateTemplateVisibility({ 
+                                                templateId: template._id, 
+                                                isPublic: !template.isPublic 
+                                            })}
+                                            disabled={isUpdatingVisibility}
+                                        >
+                                            {template.isPublic ? 'Make Private' : 'Make Public'}
+                                        </Menus.Button>
 
                                         <Modal.Open opens='delete'>
                                             <Menus.Button icon={<HiTrash className="text-red-500" />}>Delete</Menus.Button>

@@ -26,11 +26,8 @@ export default function ProfileModal() {
                     className="object-cover w-16 h-16 -mt-12 border-2 border-white rounded-full shadow-md"
                 />
                 <h2 className="mt-3 text-lg font-semibold dark:text-white">{user.first_name}</h2>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                    {user.email}
-                </p>
                 <p className="mb-5 text-sm text-slate-500 dark:text-slate-400">
-                    Session expires in {Math.floor((expTime - currentTime) / 3600)} hours
+                    {user.email}
                 </p>
                 <LogoutBtn />
             </div>

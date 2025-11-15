@@ -95,3 +95,22 @@ export const renameTemplate = async ({ accessToken, templateId, newTitle }) => {
     toast.error(err.message);
   }
 };
+
+export const updateTemplateVisibility = async ({ accessToken, templateId, isPublic }) => {
+  try {
+    let { data } = await api.post(
+      "/api/auth/update-template-visibility",
+      { templateId, isPublic },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return data.message;
+  } catch (err) {
+    console.log(err.message);
+    toast.error(err.message);
+  }
+};

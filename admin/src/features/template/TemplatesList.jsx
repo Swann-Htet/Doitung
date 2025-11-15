@@ -1,7 +1,8 @@
 import Spinner from "@/ui/Spinner";
 import useAllTemplates from "./useAllTemplates";
 import useDeleteTemplate from './useDeleteTemplate'
-import { IconFileOff, IconEye } from "@tabler/icons-react";
+import useUpdateTemplateVisibility from './useUpdateTemplateVisibility'
+import { IconFileOff, IconEye, IconEyeOff } from "@tabler/icons-react";
 import Menus from "@/ui/Menus";
 import Modal from "@/ui/modals/Modal";
 import ConfirmDelete from '@/ui/modals/ConfirmDelete'
@@ -13,6 +14,7 @@ import { useSearchParams } from "react-router-dom";
 export default function TemplatesList() {
     const { templates, templatesLoading } = useAllTemplates()
     const { deleteTemplate, isDeleting } = useDeleteTemplate()
+    const { updateTemplateVisibility, isUpdatingVisibility } = useUpdateTemplateVisibility()
 
     const [searchParams] = useSearchParams()
 
@@ -43,11 +45,22 @@ export default function TemplatesList() {
                                         </Modal.Open>
                                         <Menus.Toggle id={template._id} />
                                     </div>
-                                    {/* Edit & Delete */}
+                                    {/* Edit, Visibility & Delete */}
                                     <Menus.List id={template._id}>
                                         <Modal.Open opens='rename-form'>
                                             <Menus.Button icon={<IconPencil size={16} className="text-blue-500" />}>Edit</Menus.Button>
                                         </Modal.Open>
+
+                                        <Menus.Button 
+                                            icon={template.isPublic ? <IconEyeOff size={16} className="text-orange-500" /> : <IconEye size={16} className="text-green-500" />}
+                                            onClick={() => updateTemplateVisibility({ 
+                                                templateId: template._id, 
+                                                isPublic: !template.isPublic 
+                                            })}
+                                            disabled={isUpdatingVisibility}
+                                        >
+                                            {template.isPublic ? 'Make Private' : 'Make Public'}
+                                        </Menus.Button>
 
                                         <Modal.Open opens='delete'>
                                             <Menus.Button icon={<IconTrash size={16} className="text-red-500" />}>Delete</Menus.Button>

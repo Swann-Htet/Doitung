@@ -19,6 +19,7 @@ const {
   getAllPublicTemplates,
   getRecentTemplates,
   generateAndUploadPDF,
+  updateTemplateVisibility,
 } = require("../controllers/templateController");
 const {
   createNewRequest,
@@ -64,6 +65,8 @@ userRouter.get("/templates", userAuth, getAllTemplatesByUser);
 userRouter.post("/rename-template", userAuth, renameTemplateTitle);
 
 userRouter.post("/delete-template", userAuth, deleteTemplate);
+
+userRouter.post("/update-template-visibility", userAuth, updateTemplateVisibility);
 
 userRouter.get("/templates/:id", userAuth, getTemplateByTemplateId);
 

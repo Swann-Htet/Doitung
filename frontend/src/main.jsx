@@ -7,6 +7,7 @@ import Router from './router/index'
 import { Toaster } from 'react-hot-toast'
 import AuthContextProvider from './context-api/AuthContextProvider'
 import ThemeContextProvider from './context-api/ThemeContextProvider'
+import UserDataProvider from './context-api/UserDataProvider'
 import store from './store/store'
 import {AppContextProvider} from './demo/AppContext'
 
@@ -25,7 +26,9 @@ createRoot(document.getElementById('root')).render(
       <ThemeContextProvider>
         <AuthContextProvider>
          <AppContextProvider>
-           <Router />
+           <UserDataProvider>
+             <Router />
+           </UserDataProvider>
           <Toaster position="top-center" toastOptions={{
             duration: 3000,
             removeDelay: 1000,

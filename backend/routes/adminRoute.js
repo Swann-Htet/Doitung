@@ -14,6 +14,7 @@ const {
   uploadTemplateByAdmin,
   deleteTemplateByAdmin,
   renameTemplateTitleByAdmin,
+  updateTemplateVisibilityByAdmin,
 } = require("../controllers/templateController");
 const uploadPdf = require("../middleware/multerPdf");
 
@@ -48,5 +49,7 @@ adminRouter.post(
 adminRouter.post("/delete-template", adminAuth, deleteTemplateByAdmin);
 
 adminRouter.post("/rename-template", adminAuth, renameTemplateTitleByAdmin);
+
+adminRouter.post("/update-template-visibility", adminAuth, updateTemplateVisibilityByAdmin);
 
 module.exports = adminRouter;

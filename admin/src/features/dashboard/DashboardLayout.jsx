@@ -116,10 +116,10 @@ export default function DashboardLayout() {
 
             {/* Activity and Analytics Row */}
             <motion.div 
-                className="grid grid-cols-1 xl:grid-cols-3 gap-8"
+                className="grid grid-cols-1 xl:grid-cols-2 gap-8"
                 variants={itemVariants}
             >
-                <div className="xl:col-span-2">
+                <div className="xl:col-span-1">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="p-2 rounded-xl bg-gradient-to-r from-primary to-secondary text-white">
                             <IconActivity size={20} />
@@ -128,7 +128,7 @@ export default function DashboardLayout() {
                     </div>
                     <TodayActivity recentRequests={recentRequests} isLoading={isStatsLoading} />
                 </div>
-                <div>
+                <div className="xl:col-span-1">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="p-2 rounded-xl bg-gradient-to-r from-secondary to-accent text-white">
                             <IconTrendingUp size={20} />

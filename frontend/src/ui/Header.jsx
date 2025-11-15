@@ -40,27 +40,6 @@ export default function Header({ collapsed, setCollapsed }) {
                         />
                     </div>
                 </motion.button>
-                
-                {/* Search bar for larger screens */}
-                <motion.div 
-                    className="hidden lg:flex items-center"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                    <div className="relative">
-                        <input 
-                            type="text" 
-                            placeholder="Search..." 
-                            className="w-80 pl-4 pr-10 py-3 bg-white/80 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-600/60 rounded-xl backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
-                        />
-                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                    </div>
-                </motion.div>
             </div>
             
             <Modal>

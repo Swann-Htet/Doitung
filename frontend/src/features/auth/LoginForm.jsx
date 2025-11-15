@@ -26,8 +26,12 @@ export default function LoginForm() {
         logInUser({ email: data.email, password: data.password })
     }
     return (
-        <form onSubmit={handleSubmit(onHandleSubmitForm)} className='relative w-full max-w-sm p-6 space-y-6 bg-white rounded-lg md:w-1/2 dark:bg-slate-900'>
-            <h2 className='text-xl font-medium text-black md:text-2xl dark:text-slate-50'>Login Here</h2>
+                <form onSubmit={handleSubmit(onHandleSubmitForm)}
+                            className='relative w-full max-w-sm p-6 space-y-6 bg-white rounded-lg md:w-1/2 dark:bg-slate-900 shadow-xl animate-fadeIn'
+                            style={{ animation: 'fadeIn 0.8s cubic-bezier(0.4,0,0.2,1)' }}>
+                        <h2 className="text-2xl mb-2 tracking-tight pt-2 pr-4" style={{fontFamily: 'Playwrite CU, cursive'}}>
+                            <span className="bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent font-bold">Welcome back&nbsp;&nbsp;</span>
+                        </h2>
 
             {/* Email */}
             <div>
@@ -68,9 +72,17 @@ export default function LoginForm() {
             <button
                 disabled={isWorking}
                 type='submit'
-                className={cn("flex items-center justify-center w-full py-3 mb-24 text-white transition-colors duration-300 rounded-lg bg-primary hover:bg-red-700", isWorking && "cursor-not-allowed")}>
+                className={cn(
+                    "relative flex items-center justify-center w-full py-3 mb-24 text-white font-semibold rounded-lg transition-all duration-300",
+                    "bg-gradient-to-r from-red-500 via-red-600 to-red-700 shadow-lg hover:shadow-2xl hover:from-red-600 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-red-400/50",
+                    "before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-red-400 before:to-red-600 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-20",
+                    isWorking && "cursor-not-allowed opacity-80 transform-none hover:scale-100"
+                )}
+                style={{
+                    animation: 'slideUp 0.6s cubic-bezier(0.4,0,0.2,1)'
+                }}>
                 {isWorking && <svg className="mr-3 -ml-1 text-white size-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
-                {isWorking ? 'Signing in...' : 'Sign in'}
+                <span className="relative z-10">{isWorking ? 'Signing in...' : 'Sign in'}</span>
             </button>
 
             <p className='max-w-xs text-center lg:hidden dark:text-slate-50'>

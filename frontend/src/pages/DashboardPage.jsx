@@ -46,7 +46,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 p-6">
       {/* Welcome Header */}
       <motion.div 
         className="glass-card p-8 text-center"
@@ -54,7 +54,7 @@ export default function DashboardPage() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="text-4xl font-bold gradient-text mb-2">Welcome to Digital Signature</h1>
+        <h1 className="text-4xl font-bold gradient-text mb-2 py-6" style={{ fontFamily: 'Playwrite CU, cursive' }}>Welcome to Digital Signature</h1>
         <p className="text-slate-600 dark:text-slate-400 text-lg">Manage your documents and signatures with ease</p>
       </motion.div>
 

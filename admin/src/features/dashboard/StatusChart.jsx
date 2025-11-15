@@ -6,7 +6,7 @@ export default function StatusChart({ data = [], isLoading }) {
     return (
         <div className="glass-card p-6 space-y-4">
             <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">Status Summary</h2>
-            <div className="h-64">
+            <div className="h-64 p-4">
                 {isLoading ? (
                     <div className="flex h-full items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400">
                         Loading status data...
@@ -20,7 +20,7 @@ export default function StatusChart({ data = [], isLoading }) {
                                 dataKey={'value'}
                                 innerRadius={65}
                                 outerRadius={110}
-                                cx={'40%'}
+                                cx={'50%'}
                                 cy={'50%'}
                                 paddingAngle={3}
                             >
