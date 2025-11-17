@@ -7,7 +7,6 @@ export default function TemplateOperation() {
             options={[
                 { value: 'all', label: 'All' },
                 { value: 'true', label: 'Public' },
-                { value: 'false', label: 'Unpublic' },
             ]}
         />
     )
